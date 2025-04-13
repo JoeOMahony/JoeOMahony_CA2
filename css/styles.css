@@ -294,16 +294,6 @@ blockquote {
     font-size: 14px;
 }
 
-#container {
-    width: 80%;
-    margin: 1em auto;
-    border: solid navy;
-}
-
-header {
-    text-align: center;
-}
-
 /* LIGHT BOX */
 #gallery {
     width: 60%;
