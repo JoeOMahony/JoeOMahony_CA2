@@ -25,13 +25,15 @@
   <div id="gallery"></div>
   <!--
     LIGHT GALLERY IMPLEMENTATION VIA HANDLEBARS BELOW
+    ==> NOTE: USES SAME 'languages' ARRAY OF OBJECTS USED IN CARDS
       => JS EXCLUSIVELY IMPLEMENTED IN about-us.js
       => CSS EXCLUSIVELY DECLARED IN card-style.css
   -->
     <script id="gallery-template" type="text/x-handlebars-template">
       {{#each this}}
         <a href="images/about-us/programming-languages/{{path}}.png" data-lg-size="600-600">
-          <img alt="{{name}}" src="images/about-us/thumbnail/{{path}}.png">
+          <img alt="{{name}} - {{released}}. {{performance}} Performance, {{difficulty}} Difficulty. {{users}} Users."
+               src="images/about-us/thumbnail/{{path}}.png">
         </a>
       {{/each}}
     </script>

@@ -68,6 +68,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ------ PROGRAMMING LANGUAGE CARDS END ------ */
+
+/* ------ ARRAY OF PROGRAMMING LANGUAGE OBJECTS START ------ */
+// ==> USED BY BOTH CARDS && LIGHT GALLERY IMPLEMENTATION
+// LIGHT GALLERY IMPLEMENTATION DETAILS:
+// name => the alt of the image (displayed as caption in LightGallery)
+// path => file name in the path (bw//thumbnail//programming-languages) for Light Gallery
 const languages = [
     {
         "name": "Java",
@@ -83,7 +89,8 @@ const languages = [
             "Web Applications",
             "Game Development"
         ],
-        "users": "~10 Million"
+        "users": "~10 Million",
+        "path": "java"
     },
     {
         "name": "Python",
@@ -99,7 +106,8 @@ const languages = [
             "Machine Learning",
             "Automation"
         ],
-        "users": "~8 Million"
+        "users": "~8 Million",
+        "path": "python"
     },
     {
         "name": "C",
@@ -115,7 +123,8 @@ const languages = [
             "Operating Systems",
             "Game Development"
         ],
-        "users": "~5 Million"
+        "users": "~5 Million",
+        "path": "c"
     },
     {
         "name": "JavaScript",
@@ -131,7 +140,8 @@ const languages = [
             "Mobile Applications",
             "Game Development"
         ],
-        "users": "~12 Million"
+        "users": "~12 Million",
+        "path": "js"
     },
     {
         "name": "Ruby",
@@ -147,7 +157,8 @@ const languages = [
             "Automation",
             "Prototyping"
         ],
-        "users": "~1 Million"
+        "users": "~1 Million",
+        "path": "ruby"
     },
     {
         "name": "C++",
@@ -163,7 +174,8 @@ const languages = [
             "Real-Time Systems",
             "Embedded Systems"
         ],
-        "users": "~5 Million"
+        "users": "~5 Million",
+        "path": "c++"
     },
     {
         "name": "Swift",
@@ -178,7 +190,8 @@ const languages = [
             "macOS Applications",
             "Mobile Application Development"
         ],
-        "users": "~2 Million"
+        "users": "~2 Million",
+        "path": "swift"
     },
     {
         "name": "Go",
@@ -194,7 +207,8 @@ const languages = [
             "Microservices",
             "Web Development"
         ],
-        "users": "~3 Million"
+        "users": "~3 Million",
+        "path": "go"
     },
     {
         "name": "PHP",
@@ -209,7 +223,8 @@ const languages = [
             "Server-Side Scripting",
             "Content Management Systems"
         ],
-        "users": "~6 Million"
+        "users": "~6 Million",
+        "path": "php"
     },
     {
         "name": "Kotlin",
@@ -224,31 +239,16 @@ const languages = [
             "Web Development",
             "Backend Development"
         ],
-        "users": "~2 Million"
+        "users": "~2 Million",
+        "path": "kotlin"
     }
 ];
-/* ------ PROGRAMMING LANGUAGE CARDS END ------ */
+/* ------ ARRAY OF PROGRAMMING LANGUAGE OBJECTS START ------ */
 
 /* ------ IMAGE GALLERY HANDLEBARS START------ */
-const programmingLanguages = [
-    // Array of obj. used in the LightGallery
-    // name => the alt of the image (displayed as caption in LightGallery)
-    // path => file name in the paths (bw//thumbnail//programming-languages)
-    { name: "C++", path: "c++" },
-    { name: "C", path: "c" },
-    { name: "Go", path: "go" },
-    { name: "Java", path: "java" },
-    { name: "JavaScript", path: "js" },
-    { name: "Kotlin", path: "kotlin" },
-    { name: "PHP", path: "php" },
-    { name: "Python", path: "python" },
-    { name: "Ruby", path: "ruby" },
-    { name: "Swift", path: "swift" }
-];
-
 const template = document.getElementById("gallery-template").innerHTML;
 const compiledTemplate = Handlebars.compile(template);
-const output = compiledTemplate(programmingLanguages);
+const output = compiledTemplate(languages); // Uses above 'languages' array of JSON objects
 document.getElementById("gallery").innerHTML = output;
 /* ------ IMAGE GALLERY HANDLEBARS END------ */
 
