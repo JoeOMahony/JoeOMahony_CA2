@@ -117,7 +117,7 @@ main section {
 }
 
 
-/* LIGHT BOX */
+/* ----- LIGHT BOX GALLERY START ----- */
 #gallery {
     width: 60%;
     display: flex;
@@ -135,6 +135,7 @@ main section {
      animated. 3s specifies the duration of the transition. */
 }
 
+/* ----- MOUSE ENTER LIGHT GALLERY THUMBNAIL IMAGE START ----- */
 .animate {
     animation-name: changeColour;
     animation-duration: .5s;
@@ -149,7 +150,9 @@ main section {
         transform: scale(1.1);
     }
 }
+/* ----- MOUSE ENTER LIGHT GALLERY THUMBNAIL IMAGE END ----- */
 
+/* ----- MOUSE LEAVE LIGHT GALLERY THUMBNAIL IMAGE START ----- */
 .animate2 {
     animation-name: restoreColour;
     animation-duration: 1s;
@@ -165,3 +168,5 @@ main section {
         transform: scale(1);
     }
 }
+/* ----- MOUSE LEAVE LIGHT GALLERY THUMBNAIL IMAGE END ----- */
+/* ----- LIGHT BOX GALLERY END ----- */

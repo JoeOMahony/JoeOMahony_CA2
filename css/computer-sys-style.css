@@ -175,3 +175,53 @@ main h3 {
     padding: 0 0 1em; /* Leave just a little to sure the headings aren't on top of the entry area*/
     margin: 0;
 }
+
+
+
+/* DATA-MANIPULATION BANNER IMAGE CSS ANIMATION START */
+/* ----- MOUSE ENTER BANNER IMAGE (CSS ANIMATION) START ----- */
+.banner-image-enter {
+    animation-name: bannerImageEnter;
+    animation-duration: .5s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes bannerImageEnter {
+    0% {
+        opacity: 0;
+        transform: scale(1.1) translateY(15px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1.05) translateY(5px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+/* ----- MOUSE ENTER BANNER IMAGE (CSS ANIMATION) END ----- */
+
+/* ----- MOUSE LEAVE BANNER IMAGE (CSS ANIMATION) START ----- */
+.banner-image-leave {
+    animation-name: bannerImageLeave;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-fill-mode: forwards;
+}
+@keyframes bannerImageLeave {
+    0% {
+        opacity: .33;
+        transform: scale(0.33) translateY(-5px);
+    }
+    66% {
+        opacity: .66;
+        transform: scale(0.66) translateY(-25px);
+    }
+    100% {
+        opacity: 1;
+    }
+}
+/* ----- MOUSE LEAVE BANNER IMAGE (CSS ANIMATION) START ----- */
+/* DATA-MANIPULATION BANNER IMAGE CSS ANIMATION END */

@@ -13,10 +13,14 @@ setInterval(timer, 1000);
 /* ------ data-manipulation.html BANNER IMAGE ROLLOVER START ------ */
 document.addEventListener('DOMContentLoaded', function() {
     const bannerImage = document.getElementById('banner-img-data-manipulation');
-    bannerImage.addEventListener('mouseenter', () => bannerImage.src =
-        'images/data-manipulation/data-manipulation-2.png');
-    bannerImage.addEventListener('mouseleave', () => bannerImage.src =
-        'images/data-manipulation/data-manipulation-1.png');
+    bannerImage.addEventListener('mouseenter', () => {
+        bannerImage.src = 'images/data-manipulation/data-manipulation-2.png';
+        bannerImage.classList.add('banner-image-enter');
+    });
+    bannerImage.addEventListener('mouseleave', () => {
+        bannerImage.src = 'images/data-manipulation/data-manipulation-1.png';
+        bannerImage.classList.add('banner-image-leave');
+    });
 });
 /* ------ data-manipulation.html BANNER IMAGE ROLLOVER END ------ */
 

@@ -288,13 +288,45 @@ label {
 }
 /* ------ FACTORIAL END ------ */
 
-/* FOR ABOUT-US PAGE DEMONSTRATION*/
+/* ------ ABOUT-US PAGE DEMONSTRATION START ------ */
 blockquote {
     font-family: "consolas", monospace;
     font-size: 14px;
 }
+/* ------ ABOUT-US PAGE DEMONSTRATION END ------ */
 
+/* ------ INDEX BEFORE/AFTER CSS ANIMATION START ------ */
+/* ==> IMPLEMENTED VIA JS IN index.js */
 #index-slider {
+    transition: all 1.5s;
     width:80%;
     margin: 0 auto;
+    padding-bottom: 1em;
 }
+
+.mouseEnter {
+    animation: scaleUp 1.5s ease-out forwards;
+}
+
+@keyframes scaleUp {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+.mouseLeave {
+    animation: scaleDown 1.5s linear backwards;
+}
+
+@keyframes scaleDown {
+    0% {
+        transform: scale(1.15);
+    }
+    100% {
+        transform: scale(1.0);
+    }
+}
+/* ------ INDEX BEFORE/AFTER CSS ANIMATION START ------ */

@@ -9,6 +9,20 @@ beforeEffectslider({
         before:'Before'
     },
 });
+
+// IMAGE SLIDER CSS ANIMATION (HOVER/LEAVE)
+const slider = document.getElementById("index-slider");
+
+// MOUSE ENTER
+slider.addEventListener("mouseenter", () => {
+    slider.className = "mouseEnter";
+});
+
+// MOUSE LEAVE
+slider.addEventListener("mouseleave", () => {
+    slider.className = "mouseLeave";
+});
+
 /* ------ IMAGE SLIDER END ------ */
 
 /* ------ FOOTER TIME DISPLAY START ------ */
