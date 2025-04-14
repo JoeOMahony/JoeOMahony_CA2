@@ -6,9 +6,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="stylesheet" href="css/card-style.css">
   <link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/css/lightgallery-bundle.min.css" >
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/css/lightgallery-bundle.min.css">
 </head>
 
 <body>
@@ -24,44 +22,22 @@
 </header>
 
 <main>
-  <section id="gallery">
-    <a href="images/about-us/programming-languages/c++.png" data-lg-size="600-600">
-      <img alt="C++" src="images/about-us/thumbnail/c++.png">
-    </a>
-    <a href="images/about-us/programming-languages/c.png" data-lg-size="600-600">
-      <img alt="C" src="images/about-us/thumbnail/c.png">
-    </a>
-    <a href="images/about-us/programming-languages/go.png" data-lg-size="600-600">
-      <img alt="Go" src="images/about-us/thumbnail/go.png">
-    </a>
-    <a href="images/about-us/programming-languages/java.png" data-lg-size="600-600">
-      <img alt="Java" src="images/about-us/thumbnail/java.png">
-    </a>
-    <a href="images/about-us/programming-languages/js.png" data-lg-size="600-600">
-      <img alt="JavaScript" src="images/about-us/thumbnail/js.png">
-    </a>
-    <a href="images/about-us/programming-languages/kotlin.png" data-lg-size="600-600">
-      <img alt="Kotlin" src="images/about-us/thumbnail/kotlin.png">
-    </a>
-    <a href="images/about-us/programming-languages/php.png" data-lg-size="600-600">
-      <img alt="PHP" src="images/about-us/thumbnail/php.png">
-    </a>
-    <a href="images/about-us/programming-languages/python.png" data-lg-size="600-600">
-      <img alt="Python" src="images/about-us/thumbnail/python.png">
-    </a>
-    <a href="images/about-us/programming-languages/ruby.png" data-lg-size="600-600">
-      <img alt="Ruby" src="images/about-us/thumbnail/ruby.png">
-    </a>
-    <a href="images/about-us/programming-languages/swift.png" data-lg-size="600-600">
-      <img alt="Swift" src="images/about-us/thumbnail/swift.png">
-    </a>
-  </section>
-
+  <div id="gallery"></div>
   <!--
-  <img id="banner-img-about-us" class="banner" src="images/about-us/about-us-1.png" alt="Banner Image">
+    LIGHT GALLERY IMPLEMENTATION VIA HANDLEBARS BELOW
+      => JS EXCLUSIVELY IMPLEMENTED IN about-us.js
+      => CSS EXCLUSIVELY DECLARED IN card-style.css
   -->
+    <script id="gallery-template" type="text/x-handlebars-template">
+      {{#each this}}
+        <a href="images/about-us/programming-languages/{{path}}.png" data-lg-size="600-600">
+          <img alt="{{name}}" src="images/about-us/thumbnail/{{path}}.png">
+        </a>
+      {{/each}}
+    </script>
 
   <h1>About CodeVerse,</h1>
+
   <div class="left-align">
     <p>
       This page offers information about <span class="site-name">CodeVerse</span> and the author, as well as an
@@ -150,10 +126,16 @@
     <span id="date"></span>
   </div>
 </footer>
+
+<!-- LIGHT GALLERY/HANDLEBARS EXTERNAL LIBRARY IMPORT START -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/lightgallery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/plugins/thumbnail/lg-thumbnail.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/plugins/zoom/lg-zoom.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/plugins/fullscreen/lg-fullscreen.min.js"></script>
+<!-- LIGHT GALLERY/HANDLEBARS EXTERNAL LIBRARY IMPORT END -->
+
+<!-- LET EXTERNAL LIBRARIES LOAD BEFORE REFERENCE, DON'T MOVE ME -->
 <script src="js/about-us.js"></script>
 </body>
 </html>

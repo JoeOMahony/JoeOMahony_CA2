@@ -10,16 +10,6 @@ const timer = () => {
 setInterval(timer, 1000);
 /* ------ FOOTER TIME DISPLAY END ------ */
 
-/* ------ about-us.html BANNER IMAGE ROLLOVER START ------ */
-document.addEventListener('DOMContentLoaded', function() {
-    const bannerImage = document.getElementById('banner-img-about-us');
-    bannerImage.addEventListener('mouseenter', () => bannerImage.src =
-        'images/about-us/about-us-2.png');
-    bannerImage.addEventListener('mouseleave', () => bannerImage.src =
-        'images/about-us/about-us-1.png');
-});
-/* ------ about-us.html BANNER IMAGE ROLLOVER END ------ */
-
 /* ------ PROGRAMMING LANGUAGE CARDS START (CONTINUES FOR REST OF FILE) ------ */
 const form = document.querySelector("form");
 
@@ -77,7 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 0);
 });
 
-/* ARRAY OF OBJECTS CONTINUES FOR THE REST OF FILE */
+/* ------ PROGRAMMING LANGUAGE CARDS END ------ */
 const languages = [
     {
         "name": "Java",
@@ -237,30 +227,32 @@ const languages = [
         "users": "~2 Million"
     }
 ];
-/* ------ PROGRAMMING LANGUAGE CARDS START (EOF) ------ */
+/* ------ PROGRAMMING LANGUAGE CARDS END ------ */
 
-images = document.querySelectorAll('img');
-images = document.querySelectorAll('img');
+/* ------ IMAGE GALLERY HANDLEBARS START------ */
+const programmingLanguages = [
+    // Array of obj. used in the LightGallery
+    // name => the alt of the image (displayed as caption in LightGallery)
+    // path => file name in the paths (bw//thumbnail//programming-languages)
+    { name: "C++", path: "c++" },
+    { name: "C", path: "c" },
+    { name: "Go", path: "go" },
+    { name: "Java", path: "java" },
+    { name: "JavaScript", path: "js" },
+    { name: "Kotlin", path: "kotlin" },
+    { name: "PHP", path: "php" },
+    { name: "Python", path: "python" },
+    { name: "Ruby", path: "ruby" },
+    { name: "Swift", path: "swift" }
+];
 
-let thisimage; // Avoid implicitly declaring as a global variable
-let newimage; // Avoid implicitly declaring as a global variable
-const mouseE = (evt) => {
-    evt.target.className = "animate"
-    thisimage = evt.target.getAttribute('src');
-    newimage = thisimage.replace('thumbnail', 'bw')
-    evt.target.setAttribute('src', newimage)
-};
+const template = document.getElementById("gallery-template").innerHTML;
+const compiledTemplate = Handlebars.compile(template);
+const output = compiledTemplate(programmingLanguages);
+document.getElementById("gallery").innerHTML = output;
+/* ------ IMAGE GALLERY HANDLEBARS END------ */
 
-const mouseL = (evt) => {
-    evt.target.className = "animate2"
-    evt.target.setAttribute('src', thisimage)
-};
-
-images.forEach((item) => {
-    item.addEventListener('mouseenter', mouseE);
-    item.addEventListener('mouseleave', mouseL)
-});
-
+/* ------ LIGHT GALLERY SET-UP START------ */
 lightGallery(document.querySelector('#gallery'), {
     plugins: [lgZoom, lgThumbnail, lgFullscreen],
     thumbWidth: 80,
@@ -273,5 +265,34 @@ lightGallery(document.querySelector('#gallery'), {
     zoom: true,
     mode: 'lg-fade'
 });
+/* ------ LIGHT GALLERY SET-UP END------ */
+
+/* ------ LIGHT GALLERY B/W & ANIMATION START------ */
+let thisimage; // Avoid implicitly declaring as a global variable
+let newimage; // Avoid implicitly declaring as a global variable
+
+// NOTE: Below CSS (.animate/.animate2) implemented in card-style.css (EXCLUSIVELY used by about-us.js)
+const mouseE = (evt) => {
+    evt.target.className = "animate"
+    thisimage = evt.target.getAttribute('src');
+    newimage = thisimage.replace('thumbnail', 'bw')
+    evt.target.setAttribute('src', newimage)
+};
+
+const mouseL = (evt) => {
+    evt.target.className = "animate2"
+    evt.target.setAttribute('src', thisimage)
+};
+
+// The below selector won't affect any cards as cards are injected above in JS
+images = document.querySelectorAll('img');
+
+images.forEach((item) => {
+    item.addEventListener('mouseenter', mouseE);
+    item.addEventListener('mouseleave', mouseL)
+});
+/* ------ LIGHT GALLERY B/W & ANIMATION END------ */
+
+
 
 

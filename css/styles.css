@@ -294,51 +294,7 @@ blockquote {
     font-size: 14px;
 }
 
-/* LIGHT BOX */
-#gallery {
-    width: 60%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    gap: 1em;
-}
-
-#gallery img {
-    transition: all 3s;
-    /* The all keyword indicates that the transition effect should apply
-     to all animatable properties of the element.Animatable properties include attributes
-     like width, height, background, transform, and others.
-     By specifying all, any change to these properties will be smoothly
-     animated. 3s specifies the duration of the transition. */
-}
-
-.animate {
-    animation-name: changeColour;
-    animation-duration: .5s;
-    animation-fill-mode: forwards;
-}
-
-@keyframes changeColour {
-    0% {
-        transform: scale(1);
-    }
-    100% {
-        transform: scale(1.1);
-    }
-}
-
-.animate2 {
-    animation-name: restoreColour;
-    animation-duration: 1s;
-    animation-fill-mode: forwards;
-}
-
-
-@keyframes restoreColour {
-    0% {
-        transform: scale(1.1);
-    }
-    100% {
-        transform: scale(1);
-    }
+#index-slider {
+    width:80%;
+    margin: 0 auto;
 }

@@ -1,3 +1,16 @@
+/* ------ IMAGE SLIDER START ------ */
+beforeEffectslider({
+    Selector: "#index-slider",
+    BeforeImage: "images/index/typewriter.png", // Before Image
+    AfterImage: "images/index/laptop.png", // After Image
+    DragFrom: 60, // Percent % of before Image
+    ButtonsText:{
+        after:'After',
+        before:'Before'
+    },
+});
+/* ------ IMAGE SLIDER END ------ */
+
 /* ------ FOOTER TIME DISPLAY START ------ */
 const timer = () => {
     let now = new Date();
@@ -9,15 +22,6 @@ const timer = () => {
 }
 setInterval(timer, 1000);
 /* ------ FOOTER TIME DISPLAY END ------ */
-
-/* ------ index.html BANNER IMAGE ROLLOVER START ------ */
-document.addEventListener('DOMContentLoaded', function() {
-    // Need to specify to wait for DOM content load as image sizes are large
-    const bannerImage = document.getElementById('banner-img-welcome');
-    bannerImage.addEventListener('mouseenter', () => bannerImage.src = 'images/index/welcome-2.png');
-    bannerImage.addEventListener('mouseleave', () => bannerImage.src = 'images/index/welcome-1.png');
-});
-/* ------ index.html BANNER IMAGE ROLLOVER END ------ */
 
 /* ------ FACTORIAL CALCULATION START ------ */
 const factorial = (field) => {
