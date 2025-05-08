@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="css/card-style.css">
   <link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.8.3/css/lightgallery-bundle.min.css">
+  <link rel="stylesheet" href="css/comments.css">
 </head>
 
 <body>
@@ -29,14 +30,14 @@
       => JS EXCLUSIVELY IMPLEMENTED IN about-us.js
       => CSS EXCLUSIVELY DECLARED IN card-style.css
   -->
-    <script id="gallery-template" type="text/x-handlebars-template">
-      {{#each this}}
-        <a href="images/about-us/programming-languages/{{path}}.png" data-lg-size="600-600">
-          <img alt="{{name}} - {{released}}. {{performance}} Performance, {{difficulty}} Difficulty. {{users}} Users."
-               src="images/about-us/thumbnail/{{path}}.png">
-        </a>
-      {{/each}}
-    </script>
+  <script id="gallery-template" type="text/x-handlebars-template">
+    {{#each this}}
+      <a href="images/about-us/programming-languages/{{path}}.png" data-lg-size="600-600">
+        <img alt="{{name}} - {{released}}. {{performance}} Performance, {{difficulty}} Difficulty. {{users}} Users."
+             src="images/about-us/thumbnail/{{path}}.png">
+      </a>
+    {{/each}}
+  </script>
 
   <h1>About CodeVerse,</h1>
 
@@ -107,9 +108,57 @@
     <p>
       <span class="site-name">CodeVerse</span> was made for Trish O'Neill as part of the <i>Website Development 2</i>
       module. This assignment demonstrates my learning in HTML and CSS over the last year and a half, and also in
-      JavaScript in the last 3 months.
+      JavaScript in the last 5 months.
     </p>
   </section>
+
+  <!-- START OF COMMENTS SECTION -->
+  <!-- USES comments.css FOR STYLING (EXCLUSIVELY) -->
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+  <script src="js/comments.js"></script>
+  <section>
+    <div class="left-align">
+      <h2 class="comments-title">The Comments Section</h2>
+      <div>
+        <hr>
+        <h3>Leave a Comment</h3>
+        <form id="commentForm">
+          <div>
+            <label for="nameInput" class="comments-form-label">Name</label>
+            <input type="text" id="nameInput" required title="Please enter a valid name" placeholder="Joe O'Mahony">
+          </div>
+          <div>
+            <label for="commentInput" class="comments-form-label">Comment</label>
+            <textarea id="commentInput" rows="3" required title="Please enter a valid comment">
+            </textarea>
+          </div>
+          <button type="submit" class="comments-submit-button">Add Comment</button>
+        </form>
+
+        <h3>Comments</h3>
+        <hr />
+        <div id="commentsDisplay">
+        </div>
+
+        <script id="commentTemplate" type="text/x-handlebars-template">
+          {{#if comments.length}}
+            {{#each comments}}
+              <div class="comment-item">
+                <p><span class="comments-author-name">{{this.name}}</span>
+                  <small>({{this.displayDate}})</small></p>
+                <p>{{this.text}}</p>
+              </div>
+            {{/each}}
+          {{else}}
+            <h2 class="comments-empty-message">No comments yet!</h2>
+          {{/if}}
+        </script>
+      </div>
+    </div>
+  </section>
+  <!-- END OF COMMENTS SECTION -->
+
+
 </main>
 
 <footer>

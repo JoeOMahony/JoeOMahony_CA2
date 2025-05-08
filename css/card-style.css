@@ -128,11 +128,6 @@ main section {
 
 #gallery img {
     transition: all 3s;
-    /* The all keyword indicates that the transition effect should apply
-     to all animatable properties of the element.Animatable properties include attributes
-     like width, height, background, transform, and others.
-     By specifying all, any change to these properties will be smoothly
-     animated. 3s specifies the duration of the transition. */
 }
 
 /* ----- MOUSE ENTER LIGHT GALLERY THUMBNAIL IMAGE START ----- */

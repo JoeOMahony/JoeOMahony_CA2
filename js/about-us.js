@@ -1,3 +1,5 @@
+// about-us.js is used by about-us.html
+// COMMENTS SECTION IMPLEMENTED EXCLUSIVELY IN comments.js, NOT HERE
 /* ------ FOOTER TIME DISPLAY START ------ */
 const timer = () => {
     let now = new Date();
@@ -22,7 +24,8 @@ form.addEventListener("change", function(evt) {
     let selectedDifficulty = form.elements.difficulty.value;
     console.log(selectedDifficulty);
 
-    let selectedLanguages = languages.filter((arrItem) => arrItem.difficulty === selectedDifficulty);
+    let selectedLanguages = languages.filter((arrItem) => arrItem.difficulty
+        === selectedDifficulty);
 
     if (selectedLanguages.length > 0) {
         for (const language of selectedLanguages) {
@@ -32,7 +35,8 @@ form.addEventListener("change", function(evt) {
                     <div class="text">
                     <h3>${language.name}</h3>
                     <p>
-                    Released in ${language.released}, <i>${language.name}</i> is a ${language.typed.toLowerCase()} programming 
+                    Released in ${language.released}, <i>${language.name}</i> is a ${language.typed.toLowerCase()}
+                     programming 
                     language with a ${language.performance.toLowerCase()} level of performance. It's an
                     ${language.build.toLowerCase()} language that's considered of 
                     ${language.difficulty.toLowerCase()} difficulty to learn.
@@ -55,8 +59,8 @@ form.addEventListener("change", function(evt) {
 });
 
 /*  The form looks terrible without a difficulty selected, so the following code auto-selects Easy as this just so
-    happens to have 3 related elements, which looks well on the page. The change event will auto-trigger when the page is
-    loaded. It needs a timeout call to work, even though there is no timeout. Using selected on the HTML element alone
+    happens to have 3 related elements, which looks well on the page. The change event will auto-trigger when the page
+    is loaded. It needs a timeout call to work, even though there is no timeout. Using selected on the HTML element alone
     doesn't work. I'm placing this down here, despite already having a DOMContentLoaded event listener, as I want to
     ensure it functions as intended, so am avoiding placement before the form listener. */
 document.addEventListener("DOMContentLoaded", () => {
@@ -284,7 +288,7 @@ const mouseL = (evt) => {
     evt.target.setAttribute('src', thisimage)
 };
 
-// The below selector won't affect any cards as cards are injected above in JS
+// The below selector won't affect any cards as cards are injected above in JS. Keeping anyways, just in case
 images = document.querySelectorAll('img');
 
 images.forEach((item) => {

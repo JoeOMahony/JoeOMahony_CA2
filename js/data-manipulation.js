@@ -1,3 +1,5 @@
+// data-manipulation.html EXCLUSIVELY USES THIS
+// HANDLEBARS NOW IMPLEMENTED
 /* ------ FOOTER TIME DISPLAY START ------ */
 const timer = () => {
     let now = new Date();
@@ -128,36 +130,18 @@ const computers = [
 /* COMPUTER ARRAY OF OBJECTS END */
 
 /* ARRAY OF OBJECTS FORM/TABLE START */
-let table = document.querySelector("table");
+let table = document.getElementById("table");
 let form = document.querySelector("form");
 
+// New displayRecs Method that uses Handlebars instead of direct HTML manipulation (Assignment Part 2)
 const displayRecs = () => {
-    let tbody = table.querySelector("tbody");
-    if (!tbody) {
-        table.innerHTML = `<thead>
-            <tr>
-                <th>Manufacturer</th><th>Type</th><th>Specification</th><th>Price</th><th>Delete</th>
-            </tr>
-        </thead>
-        <tbody></tbody>`;
-        tbody = table.querySelector("tbody");
-    } else {
-        tbody.innerHTML = ""; // Only clear rows, not the entire table
-    }
+    let template = document.getElementById("computer-sys-template");
+    let compiled = Handlebars.compile(template.innerHTML);
+    let rendered = compiled(computers);
+    table.innerHTML = rendered;
+}
 
-    computers.forEach((computer) => {
-        tbody.insertAdjacentHTML(
-            "beforeend",
-            `<tr>
-                <td>${computer.manufacturer}</td>
-                <td>${computer.type}</td>
-                <td>${computer.specification}</td>
-                <td>€${computer.price}</td>
-                <td><button data-id="${computer.serialNum}">Delete</button></td>
-            </tr>`
-        );
-    });
-};
+displayRecs(); // Need to call for first load
 
 const addRecord = (evt) => {
     evt.preventDefault();
@@ -171,10 +155,11 @@ const addRecord = (evt) => {
 
     computers.push(newComputer);
 
-    // Alert, not confirm for add
+    // The alert below can't be implemented using Handlebars as Handlebars states it can't be used
+    // for alerts, confirms, or prompts without a separate JS library,
     alert(`
         You added a new computer to the system!
-        
+
         => Serial Number: ${newComputer.serialNum}
         => Manufacturer: ${newComputer.manufacturer}
         => Type: ${newComputer.type}
@@ -193,11 +178,14 @@ form.addEventListener("submit", addRecord);
 
 table.addEventListener("click", (evt) => {
     if (evt.target.matches("button")) {
-        let deleteRec = computers.findIndex((computer) => computer.serialNum === evt.target.dataset.id);
+        let deleteRec = computers.findIndex((computer) => computer.serialNum
+            === evt.target.dataset.id);
         let deleteComputer = computers[deleteRec]; // Since we already have the index, may as well use this
+        // Again, Handlebars states it can't be used for alert/confirm/prompt without needing a separate library.
+        // So, the below confirm is kept as is.
         let deleteConfirm = confirm(`
         Are you sure you want to remove this computer from the system?
-        
+
         => Serial Number: ${deleteComputer.serialNum}
         => Manufacturer: ${deleteComputer.manufacturer}
         => Type: ${deleteComputer.type}
@@ -210,37 +198,37 @@ table.addEventListener("click", (evt) => {
         }
     }
 });
+displayRecs();
 /* ARRAY OF OBJECTS FORM/TABLE START */
 
 /* DATE TIME START (FOR LAST UPDATED SPAN UNDER HEADING 2)  */
+// SAME LOGIC AS IN A01, JUST CHANGED FOR HANDLEBARS DISPLAY
 function setPreviousDateTime() {
     let dateTime = new Date();
 
     // Setting a hard date here, as this shouldn't be dynamic
-    dateTime.setHours(18, 49);
-    dateTime.setDate(31);
-    dateTime.setMonth(2); // ZERO-BASED INDEX, 2=MARCH
+    // Fresh date
+    dateTime.setHours(23, 11);
+    dateTime.setDate(1);
+    dateTime.setMonth(4); // ZERO-BASED INDEX, 2=MARCH
     dateTime.setFullYear(2025);
 
-    const spanText = document.getElementById("com-mgmt-last-update");
+    const timeOptions = {
+        weekday: dateTime.toLocaleDateString('en-ie', { weekday: 'long' }),
+        day: dateTime.getDate(),
+        month: dateTime.toLocaleDateString('en-ie', { month: 'long' }),
+        year: dateTime.toLocaleDateString('en-ie', { year: 'numeric' }),
+        time: dateTime.toLocaleTimeString('en-ie', { hour: '2-digit', minute: '2-digit', hour12: false })
+    };
 
-    // Clear the content first to avoid doubling
-    spanText.innerHTML = '';
+    const lastUpdateSpan = document.getElementById("com-mgmt-last-update");
+    const template = document.getElementById("last-updated-template").innerHTML;
+    const compiled = Handlebars.compile(template);
+    const renderedHtml = compiled(timeOptions);
 
-    spanText.insertAdjacentHTML("afterbegin", `
-      <b>System Last Updated:</b>
-      <span id="date-calculation">
-        ${dateTime.toLocaleDateString('en-ie', { weekday: 'long' })}
-        ${dateTime.getDate()}
-        ${dateTime.toLocaleDateString('en-ie', { month: 'long' })}
-        ${dateTime.toLocaleDateString('en-ie', { year: 'numeric' })}
-        @
-        ${dateTime.toLocaleTimeString('en-ie', { hour: '2-digit', minute: '2-digit', hour12: false })}
-      </span>
-      <button id="reset-system-datetime">Reset</button>
-      <button id="update-system-datetime">Update</button>
-    `);
+    lastUpdateSpan.innerHTML = renderedHtml;
 
+    // Re-attaching to fix weird bug where the buttons stop working after a few clicks
     document.getElementById("update-system-datetime").addEventListener("click", setCurrentDateTime);
     document.getElementById("reset-system-datetime").addEventListener("click", setPreviousDateTime);
 }
@@ -248,37 +236,39 @@ function setPreviousDateTime() {
 function setCurrentDateTime() {
     let dateTime = new Date();
 
-    const spanText = document.getElementById("com-mgmt-last-update");
+    const timeOptions = {
+        weekday: dateTime.toLocaleDateString('en-ie', { weekday: 'long' }),
+        day: dateTime.getDate(),
+        month: dateTime.toLocaleDateString('en-ie', { month: 'long' }),
+        year: dateTime.toLocaleDateString('en-ie', { year: 'numeric' }),
+        time: dateTime.toLocaleTimeString('en-ie', { hour: '2-digit', minute: '2-digit', hour12: false })
+    };
 
-    // Clear the content first to avoid doubling
-    spanText.innerHTML = '';
+    const updateTimeSpan = document.getElementById("com-mgmt-last-update");
+    const template = document.getElementById("last-updated-template").innerHTML;
+    const compiled = Handlebars.compile(template);
+    const rendered = compiled(timeOptions);
 
-    spanText.insertAdjacentHTML("afterbegin", `
-      <b>System Last Updated:</b>
-      <span id="date-calculation">
-        ${dateTime.toLocaleDateString('en-ie', { weekday: 'long' })}
-        ${dateTime.getDate()}
-        ${dateTime.toLocaleDateString('en-ie', { month: 'long' })}
-        ${dateTime.toLocaleDateString('en-ie', { year: 'numeric' })}
-        @
-        ${dateTime.toLocaleTimeString('en-ie', { hour: '2-digit', minute: '2-digit', hour12: false })}
-      </span>
-      <button id="reset-system-datetime">Reset</button>
-      <button id="update-system-datetime">Update</button>
-    `);
+    updateTimeSpan.innerHTML = rendered;
 
-    // Attach event listeners again after updating content
+    // Re-attaching again to fix weird bug where the buttons stop working after a few clicks
     document.getElementById("update-system-datetime").addEventListener("click", setCurrentDateTime);
     document.getElementById("reset-system-datetime").addEventListener("click", setPreviousDateTime);
 }
 
 // DEFAULT WILL BE HARD-CODED DATE TIME
-setPreviousDateTime();
+// GOING TO USE SetTimeOut() for half a second to allow time for the rest of the page to load.
+// I could've waited for DOMContentLoaded, but this method was required in assignment specification.
+setTimeout(() => {
+    setPreviousDateTime();
+    console.log("Assignment spec: showing I used setTimeout(), setting previous date time (default) " +
+        "after a half second");
+}, 500);
 /* DATE TIME END (FOR LAST UPDATED SPAN UNDER HEADING 2)  */
 
 /* SEARCH FOR A COMPUTER BAR START */
+// LOGIC SAME AS BEFORE, ONLY THE DISPLAY THE COMPUTER SYSTEM PART CHANGED BELOW
 document.getElementById("searchInput").addEventListener("input", () => {
-    // TRIGGER is input event, want computer search to be performed on input
     let searchTerm = document.getElementById("searchInput").value.toLowerCase();
     const filteredComputers = computers.filter((computer) => {
         return (
@@ -289,43 +279,27 @@ document.getElementById("searchInput").addEventListener("input", () => {
             computer.type.toLowerCase().includes(searchTerm) ||
             computer.specification.toLowerCase().includes(searchTerm) ||
             // ONLY RUN THE BELOW IF IT IS(!!) A NUMBER, STOP THE ERROR
-            !(isNaN(searchTerm)) && computer.price === parseFloat(searchTerm)
+            (!(isNaN(parseFloat(searchTerm))) && searchTerm.trim() !== '' && computer.price === parseFloat(searchTerm))
         );
     });
 
-    let tbody = table.querySelector("tbody");
-    tbody.innerHTML = "";
+    // Just going to re-use existing Handlebars for first display of the table
+    let template = document.getElementById("computer-sys-template").innerHTML;
+    let compiled = Handlebars.compile(template);
 
-    if (filteredComputers.length > 0) { // IF NOT Blank
-        filteredComputers.forEach((computer) => {
-            tbody.insertAdjacentHTML(
-                "beforeend",
-                `<tr>
-                <td>${computer.manufacturer}</td>
-                <td>${computer.type}</td>
-                <td>${computer.specification}</td>
-                <td>€${computer.price}</td>
-                <td><button data-id="${computer.serialNum}">Delete</button></td>
-            </tr>`
-            );
-        });
-    } else { // IF BLANK
-        tbody.insertAdjacentHTML(
-            "beforeend",
-            `<tr>
-                    <td colspan="5" rowspan="5" style="background-color: white; padding: 1em; 
-                    text-decoration: double underline; color: #00004d">
-                    <b>No Computer Found!</b></td>
-                    </tr>
-            `);
-    }
+    // Handlebars handles when no results are found with an unless this in the html file
+    let rendered = compiled(filteredComputers);
+    document.getElementById("table").innerHTML = rendered;
 });
 /* SEARCH FOR A COMPUTER BAR END */
 
 /* CLEAR RESULTS START */
 document.getElementById("reset-search-button").addEventListener("click", () => {
-    let searchTerm = document.getElementById("searchInput").value; // taken from above
-    searchTerm = "";
-    displayRecs();
-})
+    document.getElementById("searchInput").value = ""; // Clear the input box
+    // GOING TO USE SetTimeOut() for a full second here to show I used it for assignment spec
+    setTimeout(() => {
+        displayRecs();
+        console.log("Assignment spec: showing I used setTimeout(), clearing results after a second");
+    }, 1000);
+});
 /* CLEAR RESULTS END */

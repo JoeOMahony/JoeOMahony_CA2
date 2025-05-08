@@ -6,6 +6,7 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="images/favicon/favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="css/computer-sys-style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.min.js"></script>
 </head>
 
 <body>
@@ -42,7 +43,7 @@
           prompt, an alert prompt with details when you add an item to the system, clearing form fields, clearing search
           results, a last updated timestamp, an ability to change the last updated timestamp to the current time,
           and also to reverse that change.
-          </p>
+        </p>
       </div>
       <div id="container">
         <form>
@@ -115,25 +116,55 @@
           </div>
         </div>
 
+        <!-- START OF HANDLEBARS TEMPLATE FOR THE COMPUTER SYSTEM TABLE -->
+        <!-- TAKEN FROM L10 LABS WORK BUT ADAPTED FOR COMPUTER VS. EVENTS, LOGIC THE SAME AS A01-->
+        <div id="table"></div> <!-- DIV DOM ELEMENT FOR TABLE -->
+        <script id="computer-sys-template" type= "text/x-handlebars-template">
+          {{#unless this}}
+            <h3>No results found!</h3> <!-- THIS WILL DISPLAY IF NOTHING IS FOUND -->
+          {{else}}
+            <table>
+              <thead>
+              <tr>
+                <th>Manufacturer</th>
+                <th>Type</th>
+                <th>Specification</th>
+                <th>Price</th>
+                <th>Delete</th>
+              </tr>
+              </thead>
+              <tbody id="computer-list">
+              {{#each this}}
+                <tr>
+                  <td>{{manufacturer}}</td>
+                  <td>{{{type}}}</td>
+                  <td>{{{specification}}}</td>
+                  <td>{{price}}</td>
+                  <td><button data-id="{{serialNum}}">Delete</button></td>
+                </tr>
+              {{/each}}
+              </tbody>
+            </table>
+          {{/unless}}
+        </script>
+        <!-- END OF HANDLEBARS TEMPLATE FOR THE COMPUTER SYSTEM TABLE -->
 
-        <table>
-          <thead>
-          <tr>
-            <th>Manufacturer</th>
-            <th>Type</th>
-            <th>Specification</th>
-            <th>Price</th>
-            <th></th>
-          </tr>
-          </thead>
-          <tbody id="computer-list"></tbody>
-        </table>
+        <!-- START OF HANDLEBARS TEMPLATE FOR THE LAST UPDATED BUTTONS -->
+        <script id="last-updated-template" type="text/x-handlebars-template">
+          <b>System Last Updated:</b>
+          <span id="date-calculation">
+            {{weekday}} {{day}} {{month}} {{year}} @ {{time}}
+          </span>
+          <button id="reset-system-datetime">Reset</button>
+          <button id="update-system-datetime">Update</button>
+        </script>
         <span id="com-mgmt-last-update"></span>
+        <!-- END OF HANDLEBARS TEMPLATE FOR THE LAST UPDATED BUTTONS -->
+
       </div>
     </section>
   </div>
 </main>
-
 <footer>
   <div class="footer-top">
     <div class="logo"><a href="index.html" class="unstyled-link">CodeVerse</a></div>
@@ -150,8 +181,6 @@
     <span id="date"></span>
   </div>
 </footer>
-
-
 <script src="js/data-manipulation.js"></script>
 </body>
 </html>

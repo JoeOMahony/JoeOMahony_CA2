@@ -1,0 +1,32 @@
+/*
+    SMALL CSS FILE FOR EXCLUSIVE USE BY THE COMMENTS SECTION IN about-us.html
+ */
+.comments-title {
+    text-align: center !important;
+}
+
+.comments-form-label {
+    color: #00004d;
+    font-weight: 600;
+}
+
+.comments-submit-button {
+    background: #00004d;
+    color: white;
+    font-size: .8em;
+}
+
+.comments-author-name {
+    color: #00004d;
+    font-weight: 600;
+}
+
+.comments-empty-message {
+    text-align: center !important;
+}
+
+.comment-item {
+    border: 1px solid #eee;
+    padding: 10px;
+    margin-bottom: 10px;
+}
